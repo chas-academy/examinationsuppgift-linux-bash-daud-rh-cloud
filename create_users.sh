@@ -19,15 +19,15 @@ for username in "$@"; do
     chmod 700 /home/"$username"/Downloads
     chmod 700 /home/"$username"/Work
 
-    #7. Se till att användaren äger sina nya mappar och sin hemkatalog
+    #5. Se till att användaren äger sina nya mappar och sin hemkatalog
     chown -R "$username":"$username" /home/"$username"
 
 
-    # 5.Skapa välkomstmeddelandet
+    # 6.Skapa välkomstmeddelandet
     echo "Välkommen $username" > /home/"$username"/welcome.txt
     
  
-     #6.Lista andra mänskliga användare (UID 999-60000) och lägg till i filen
+     #7.Lista andra mänskliga användare (UID 999-60000) och lägg till i filen
         echo "Other users on this system:" >> /home/"$username"/welcome.txt
         awk -F: '($3 >= 999) && ($3 < 60000) {print $1}' /etc/passwd >> /home/"$username"/welcome.txt
         echo "$@" >> /home/"$username"/welcome.txt
